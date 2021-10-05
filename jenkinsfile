@@ -17,7 +17,7 @@ pipeline {
       }
       stage('Deploy'){
           steps {
-            stash includes: '**/.war' name:'spc_st'
+            stash includes: '**/*.war' name:'spc_st'
           }
       }
       stage('devserver'){
@@ -31,7 +31,7 @@ pipeline {
     //     steps{
     //         git branch: 'master', url:'https://github.com/Navi-g/navi-ansible.git'
     //         sh 'ansible-playbook -i hosts Spc_ply.yaml'
-    //     }
+        }
     post {
         success{
             echo +env.BUILD_ID+ 'successfull'
