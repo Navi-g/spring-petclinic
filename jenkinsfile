@@ -4,7 +4,7 @@ pipeline {
         pollSCM('* * * * *')
         }
     stages{
-      stage('Prerequisit'){
+      stage('Prerequisit') {
           steps {
               sh sudo apt update;sudo apt install openjdk-8-jdk -y;sudo apt install maven -y
           }
@@ -19,7 +19,8 @@ pipeline {
               sh 'mvn clean package'
           }
       }
-    post{
+    }
+    post {
         success{
             echo +env.BUILD_ID+ 'successfull'
             archive '**/gameoflife.war'
@@ -28,9 +29,8 @@ pipeline {
         failure{
             echo +env.BUILD_ID+ 'Faild'
             mail subject: 'BUILD Failed '+env.BUILD_ID+'URL is '+env.BUILD_URL, to: 'devops@qt.com', from: 'jenkins@qt.com', body: 'EMPTY BODY'
-            }
+            }  
         }
-    }
     
       
 }
